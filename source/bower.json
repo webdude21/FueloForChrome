@@ -1,0 +1,22 @@
+{
+  "name": "Fuelo for Chrome",
+  "version": "1.0.0",
+  "homepage": "https://github.com/webdude21/FueloForChrome",
+  "authors": [
+    "webdude21 <webdude@webdude.eu>"
+  ],
+  "description": "A Chrome extension for Fuelo's fuel price service",
+  "main": "popup.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "/source/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.2"
+  }
+}
