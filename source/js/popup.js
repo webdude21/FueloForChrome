@@ -1,15 +1,26 @@
-(function (){
+(function () {
     var fuelTypes = fueloChromeApp.services.fuelTypes,
-        $fuelTypesContainer = $('#fuel-types'),
-        $fuelTypesTemplateContainer = $('#fuel-type-template');
+        services = fueloChromeApp.services,
+        $fuelTypesSelect = $('#fuel-types'),
+        $getPricesButton = $('#get-prices');
 
-    function renderTemplate(){
-        //var compiledTemplate = Handlebars.compile($fuelTypesTemplateContainer.html());
-        //$fuelTypesContainer.html(compiledTemplate({
-        //    fuelTypes: fuelTypes
-        //}));
+    function _renderFuelTypesDropDown() {
+        fuelTypes.forEach(function (item) {
+            $fuelTypesSelect.append('<option value="' + item + '">' + item + '</option>')
+        })
     }
 
-    $(window).on('load', renderTemplate);
+    function _getPricesButtonClick() {
+        services.getAveragePrice($fuelTypesSelect.val()).then(function (result){
+            console.log(result);
+        });
 
+    }
+
+    function renderView() {
+        _renderFuelTypesDropDown();
+        $getPricesButton.on('click', _getPricesButtonClick);
+    }
+
+    $(window).on('load', renderView);
 }());

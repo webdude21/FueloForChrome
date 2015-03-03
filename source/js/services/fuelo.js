@@ -25,7 +25,7 @@ fueloChromeApp.services = (function () {
 
             if (dateUtil().isValid(date)) {
                 date = dateUtil().format(DATE_FORMAT);
-                requestURL = httpRequester.addParams(params.date, date, requestURL);
+                requestURL += httpRequester.addParams(params.date, date, requestURL);
             }
 
             return httpRequester.getJSON(requestURL);

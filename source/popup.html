@@ -34,23 +34,19 @@
     </svg>
 </div>
 
-<div id="fuel-types"></div>
-
 <form>
     <fieldset id="main-field">
-        <label for="project"></label>
-        <select class="form-control form-group" id="project">
-            {{#each fuelTypes}}
-            <option value="{{this}}">{{this}}</option>
-            {{/each}}
+        <label for="fuel-types">Select fuel type</label>
+        <select class="form-control form-group" id="fuel-types">
         </select>
-        <button type="button" class="btn btn-block btn-primary" id="submit">Get Prices</button>
+        <button type="button" class="btn btn-block btn-primary" id="get-prices">Get Prices</button>
     </fieldset>
 </form>
 
 <script src="lib/jquery/dist/jquery.min.js"></script>
 <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="lib/moment/moment.js"></script>
+<script src="lib/q/q.js"></script>
 <script src="js/helpers/enum.js"></script>
 <script src="js/helpers/http-requester.js"></script>
 <script src="js/services/fuelo.js"></script>
