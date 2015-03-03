@@ -3,7 +3,6 @@ if (!fueloChromeApp) {
 }
 
 fueloChromeApp.httpRequester = (function () {
-    "use strict";
     var makeHttpRequest = function (url, type, data, timeout) {
         var deferred = Q.defer();
         $.ajax({
@@ -22,6 +21,12 @@ fueloChromeApp.httpRequester = (function () {
 
         return deferred.promise;
     };
+
+    function addParams(key, value, requestUrl) {
+        var isFirstParam = requestUrl.indexOf('?') === -1;
+        return requestUrl + isFirstParam ? '?' + key + '=' + value : '&' + key + '=' + value;
+    }
+
 
     var getJSON = function (url) {
         return makeHttpRequest(url, "GET");
@@ -73,6 +78,7 @@ fueloChromeApp.httpRequester = (function () {
         getJSON: getJSON,
         postJSON: postJSON,
         putJSONWithCustomHeaders: putJSONWithCustomHeaders,
-        postJSONWithCustomHeaders: postJSONWithCustomHeaders
+        postJSONWithCustomHeaders: postJSONWithCustomHeaders,
+        addParams: addParams
     }
 }());

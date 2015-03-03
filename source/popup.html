@@ -34,31 +34,24 @@
     </svg>
 </div>
 
+<div id="fuel-types"></div>
+
 <form>
-    <p id="error" class="text-danger text-center text-hide">
-        <strong>Please open your JIRA and sign in!</strong>
-    </p>
-    <fieldset id="main-field" disabled>
+    <fieldset id="main-field">
+        <label for="project"></label>
         <select class="form-control form-group" id="project">
-            <option value="default">- select project -</option>
+            {{#each fuelTypes}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
         </select>
-        <select class="form-control form-group" id="version">
-            <option value="default">- select project version -</option>
-        </select>
-        <button type="button" class="btn btn-block btn-primary" id="submit" disabled>Get issues</button>
+        <button type="button" class="btn btn-block btn-primary" id="submit">Get Prices</button>
     </fieldset>
 </form>
 
-<p id="link-to-webstore" class="message text-center">Made with <i class="glyphicon glyphicon-heart"></i>, so
-    don't forget to
-    <i class="glyphicon glyphicon-star"></i> it.</p>
-
-<template id="template-for-option-tag">
-    <option></option>
-</template>
-
 <script src="lib/jquery/dist/jquery.min.js"></script>
 <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="lib/moment/moment.js"></script>
+<script src="js/helpers/enum.js"></script>
 <script src="js/helpers/http-requester.js"></script>
 <script src="js/services/fuelo.js"></script>
 <script src="js/popup.js"></script>
