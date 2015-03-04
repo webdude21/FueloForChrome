@@ -23,10 +23,9 @@ fueloChromeApp.httpRequester = (function () {
     };
 
     function addParams(key, value, requestUrl) {
-        var isFirstParam = requestUrl.indexOf('?') === -1;
-        return requestUrl + isFirstParam ? '?' + key + '=' + value : '&' + key + '=' + value;
+        var isFirstParam = (requestUrl.indexOf('?') === -1);
+        return (requestUrl + (isFirstParam ? '?' + key + '=' + value : '&' + key + '=' + value));
     }
-
 
     var getJSON = function (url) {
         return makeHttpRequest(url, "GET");

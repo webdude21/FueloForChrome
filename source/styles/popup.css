@@ -1,14 +1,6 @@
 body, section {
     overflow-x: hidden;
-    width: 300px;
-}
-
-.navbar {
-    border-left: none;
-    border-radius: 0;
-    border-right: none;
-    border-top: none;
-    margin-bottom: 0;
+    width: 400px;
 }
 
 .navbar-header {
@@ -16,34 +8,11 @@ body, section {
 }
 
 .navbar-brand {
-    line-height: 1;
     text-align: center;
     width: 100%;
 }
 
-.loading {
-    font-size: 0;
-    line-height: 1;
-    margin: 0 auto;
-    text-align: center;
-}
-
-/* Basic style tweaks */
-section,
-form {
-    padding: 0 5px;
-}
-
-.message {
-    color: #5e5e5e;
-    margin-top: 3rem
-}
-
-.message:hover {
-    color: #333;
-    cursor: pointer
-}
-
-.text-hide {
-    margin: 0;
+section, form {
+    padding: 0 10px;
+    margin: 20px 0 20px 0;
 }
