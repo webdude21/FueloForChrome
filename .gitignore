@@ -3,6 +3,8 @@
 #################
 
 source/lib/
+node_modules/
+FueloForChrome.zip
 
 #################
 ## Eclipse
