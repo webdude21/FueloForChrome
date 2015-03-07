@@ -79,5 +79,5 @@ fueloChromeApp.httpRequester = (function () {
         putJSONWithCustomHeaders: putJSONWithCustomHeaders,
         postJSONWithCustomHeaders: postJSONWithCustomHeaders,
         addParams: addParams
-    }
+    };
 }());

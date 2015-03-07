@@ -33,5 +33,5 @@ fueloChromeApp.services = (function () {
         fuelType: fuelType,
         fuelTypes: fuelTypes,
         DATE_FORMAT: DATE_FORMAT
-    }
+    };
 }());

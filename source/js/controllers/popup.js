@@ -14,8 +14,8 @@
 
     function _renderFuelTypesDropDown() {
         fuelTypesForUI.forEach(function (item) {
-            $fuelTypesSelect.append('<option value="' + item.value + '">' + item.text + '</option>')
-        })
+            $fuelTypesSelect.append('<option value="' + item.value + '">' + item.text + '</option>');
+        });
     }
 
     function _retrieveInformationFromService() {
@@ -36,14 +36,18 @@
         '<button type="button" class="close" data-dismiss="alert">×</button>' +
         '<strong>' + resultText + '</strong></div>');
 
-        querySuccess ? $resultHTML.addClass('alert-success') : $resultHTML.addClass('alert-danger');
+        if (querySuccess) {
+            $resultHTML.addClass('alert-success');
+        } else {
+            $resultHTML.addClass('alert-danger');
+        }
 
         $resultContainer.html('');
         $resultContainer.append($resultHTML);
     }
 
     function forewordToWebStore() {
-        chrome.tabs.create({url: authorLink})
+        chrome.tabs.create({url: authorLink});
     }
 
     function renderView() {
