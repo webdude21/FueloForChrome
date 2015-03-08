@@ -19,6 +19,7 @@ module.exports = function (grunt) {
                     '<%= project.libs %>/jquery-ui/jquery-ui.min.js',
                     '<%= project.libs %>/q/q.js',
                     '<%= project.src %>/helpers/enum.js',
+                    '<%= project.src %>/helpers/analytics.js',
                     '<%= project.src %>/helpers/http-requester.js',
                     '<%= project.src %>/services/fuelo.js',
                     '<%= project.src %>/controllers/popup.js'],
@@ -86,7 +87,10 @@ module.exports = function (grunt) {
         },
         clean: {
             build: {
-                src: ['.tmp', '<%= project.build %>', '<%= pkg.name %>.zip']
+                src: ['.tmp', '<%= project.build %>']
+            },
+            zip: {
+                srt: ['<%= pkg.name %>.zip']
             }
         }
     });
@@ -98,5 +102,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.registerTask('build', ['jshint', 'clean', 'concat', 'uglify', 'cssmin', 'copy', 'compress']);
+    grunt.registerTask('build', ['jshint', 'clean', 'concat', 'uglify', 'cssmin', 'copy', 'compress', 'clean:build']);
 };
