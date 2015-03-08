@@ -102,5 +102,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.registerTask('build', ['jshint', 'clean', 'concat', 'uglify', 'cssmin', 'copy', 'compress', 'clean:build']);
+    grunt.registerTask('build-zip', ['jshint', 'clean', 'concat', 'uglify', 'cssmin', 'copy', 'compress', 'clean:build']);
+    grunt.registerTask('build', ['jshint', 'clean', 'concat', 'uglify', 'cssmin', 'copy', 'compress']);
 };

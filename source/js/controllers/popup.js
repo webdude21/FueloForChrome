@@ -18,6 +18,10 @@
         });
     }
 
+    function _trackButtonClick(e) {
+        _gaq.push(['_trackEvent', e.target.id, 'clicked']);
+    }
+
     function _retrieveInformationFromService() {
         var date = moment($datePicker.val());
         services.getAveragePrice($fuelTypesSelect.val(), date).then(function (result) {
@@ -54,6 +58,7 @@
         $datePicker.datepicker({dateFormat: UI_DATE_FORMAT, showButtonPanel: true});
         _renderFuelTypesDropDown();
         $getPricesButton.on('click', _retrieveInformationFromService);
+        $getPricesButton.on('click', _trackButtonClick);
         $navBarLink.on('click', forewordToWebStore);
     }
 
