@@ -1,17 +1,10 @@
-if (!fueloChromeApp) {
-    var fueloChromeApp = {};
-}
-
-fueloChromeApp.updateFavoriteFuelInformation = (function () {
-    var $fuelTypesSelect = $('#fuel-types'),
-        persistentStorage = localStorage.fueloChromeApp,
-        services = fueloChromeApp.services;
-
-    return services.getAveragePrice($fuelTypesSelect.val()).then(function (result) {
-            persistentStorage.favoriteFuelInfo = {
-                fuelType: $fuelTypesSelect.val(),
+fueloChromeApp.updateFavoriteFuelInformation = function (fuelType) {
+    return fueloChromeApp.services.getAveragePrice(fuelType)
+        .then(function (result) {
+            localStorage.favoriteFuelInfo = {
+                fuelType: fuelType,
                 cachedValue: result.price,
                 lastUpdated: moment().startOf('day')
             };
         });
-}());
+};
