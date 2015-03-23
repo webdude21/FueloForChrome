@@ -12,6 +12,10 @@
     "default_icon": "img/icon48.png",
     "default_popup": "popup.html"
   },
+  "background": {
+    "scripts": ["backgroundEvents.js"],
+    "persistent": false
+  },
   "icons": {
     "16": "img/icon16.png",
     "48": "img/icon48.png",
@@ -19,6 +23,9 @@
   },
   "permissions": [
     "activeTab",
+    "storage",
+    "notifications",
+    "background",
     "http://fuelo.net/api/"
   ],
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",

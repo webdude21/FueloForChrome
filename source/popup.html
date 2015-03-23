@@ -2,7 +2,7 @@
 <html lang="bg">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" charset="UTF-8">
-    <link rel="stylesheet" href="styles/build.min.css"/>
+    <link rel="stylesheet" href="styles/popup.min.css"/>
     <title>Fuelo for Chrome</title>
 </head>
 <body>
@@ -21,9 +21,15 @@
     </fieldset>
     <fieldset id="result-field">
     </fieldset>
-    <button type="button" class="btn btn-block btn-primary" id="get-prices">Покажи цената</button>
+    <button type="button" class="btn btn-block btn-primary"
+            title="Ще покаже цената на избраното гориво за съответния ден или, ако такъв не е избран за днес"
+            id="get-prices">Покажи цената</button>
+    <button type="button" class="btn btn-block btn-primary"
+            title="Ще показва цената за деня на избраното гориво под иконката на приложението"
+            id="set-as-favorite">Използвай по подразбиране</button>
 </form>
 
-<script src="js/build.min.js"></script>
+
+<script src="js/popup.min.js"></script>
 </body>
 </html>

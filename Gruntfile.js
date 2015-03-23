@@ -6,7 +6,8 @@ module.exports = function (grunt) {
             src: '<%= project.root %>/js',
             libs: '<%= project.root %>/lib',
             css: '<%= project.root %>/styles',
-            build: 'build'
+            popup: 'popup',
+            eventPage: 'eventPage'
         },
         jshint: {
             app: ['Gruntfile.js', '<%= project.src %>/**/*.js']
@@ -22,15 +23,16 @@ module.exports = function (grunt) {
                     '<%= project.src %>/helpers/analytics.js',
                     '<%= project.src %>/helpers/http-requester.js',
                     '<%= project.src %>/services/fuelo.js',
+                    '<%= project.src %>/helpers/persister.js',
                     '<%= project.src %>/controllers/popup.js'],
-                dest: '.tmp/concat/js/build.js'
+                dest: '.tmp/concat/js/popup.js'
             },
             css: {
                 src: ['<%= project.libs %>/bootstrap/dist/css/bootstrap.min.css',
                     '<%= project.libs %>/bootstrap/dist/css/bootstrap-theme.min.css',
                     '<%= project.libs %>/jquery-ui/themes/base/jquery-ui.min.css',
                     '<%= project.css %>/popup.css'],
-                dest: '.tmp/concat/styles/build.css'
+                dest: '.tmp/concat/styles/popup.css'
             }
         },
         uglify: {
@@ -39,38 +41,38 @@ module.exports = function (grunt) {
             },
             js: {
                 files: {
-                    '.tmp/min/js/build.min.js': '.tmp/concat/js/build.js'
+                    '.tmp/min/js/popup.min.js': '.tmp/concat/js/popup.js'
                 }
             }
         },
         cssmin: {
             css: {
                 files: {
-                    '.tmp/min/styles/build.min.css': '.tmp/concat/styles/build.css'
+                    '.tmp/min/styles/popup.min.css': '.tmp/concat/styles/popup.css'
                 }
             }
         },
         copy: {
             img: {
                 files: [
-                    {expand: true, cwd: '<%= project.root %>', src: ['img/**'], dest: '<%= project.build %>'}
+                    {expand: true, cwd: '<%= project.root %>', src: ['img/**'], dest: '<%= project.popup %>'}
                 ]
             },
             js: {
                 files: {
-                    '<%= project.build %>/js/build.min.js': '.tmp/min/js/build.min.js'
+                    '<%= project.popup %>/js/popup.min.js': '.tmp/min/js/popup.min.js'
                 }
             },
             css: {
                 files: {
-                    '<%= project.build %>/styles/build.min.css': '.tmp/min/styles/build.min.css'
+                    '<%= project.popup %>/styles/popup.min.css': '.tmp/min/styles/popup.min.css'
                 }
             },
             html: {
                 files: [
                     {
                         expand: true, flatten: true, cwd: '<%= project.root %>', src: ['*.html', '*.json '],
-                        dest: '<%= project.build %>', filter: 'isFile'
+                        dest: '<%= project.popup %>', filter: 'isFile'
                     }
                 ]
             }
@@ -81,13 +83,16 @@ module.exports = function (grunt) {
                     archive: '<%= pkg.name %>.zip'
                 },
                 files: [
-                    {expand: true, cwd: '<%= project.build %>', src: ['**/*'], dest: '/'}
+                    {expand: true, cwd: '<%= project.popup %>', src: ['**/*'], dest: '/'}
                 ]
             }
         },
         clean: {
-            build: {
-                src: ['.tmp', '<%= project.build %>']
+            popup: {
+                src: ['.tmp', '<%= project.popup %>']
+            },
+            eventPage: {
+                src: ['.tmp', '<%= project.eventPage %>']
             },
             zip: {
                 srt: ['<%= pkg.name %>.zip']
@@ -102,6 +107,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.registerTask('build-zip', ['jshint', 'clean', 'concat', 'uglify', 'cssmin', 'copy', 'compress', 'clean:build']);
+    grunt.registerTask('build-zip', ['jshint', 'clean', 'concat', 'uglify', 'cssmin', 'copy', 'compress', 'clean:popup']);
     grunt.registerTask('build', ['jshint', 'clean', 'concat', 'uglify', 'cssmin', 'copy', 'compress']);
 };

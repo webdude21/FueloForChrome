@@ -18,10 +18,10 @@ fueloChromeApp.services = (function () {
         fuelType = new fueloChromeApp.Enum(fuelTypes);
 
     return {
-        getAveragePrice: function (fuelType, date) {
-            fuelType = fuelType || fuelType.gasoline;
+        getAveragePrice: function (inputFuelType, date) {
+            var requestFuelType = inputFuelType || fuelType.gasoline;
             var requestURL = httpRequester.addParams(params.key, API_KEY, BASE_URL + params.price);
-            requestURL = httpRequester.addParams(params.fuel, fuelType, requestURL);
+            requestURL = httpRequester.addParams(params.fuel, requestFuelType, requestURL);
 
             if (dateUtil(date).isValid()) {
                 var formattedDate = dateUtil(date).format(DATE_FORMAT);

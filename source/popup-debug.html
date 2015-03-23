@@ -24,7 +24,12 @@
     </fieldset>
     <fieldset id="result-field">
     </fieldset>
-    <button type="button" class="btn btn-block btn-primary" id="get-prices">Покажи цената</button>
+    <button type="button" class="btn btn-block btn-primary"
+            title="Ще покаже цената на избраното гориво за съответния ден или, ако такъв не е избран за днес"
+            id="get-prices">Покажи цената</button>
+    <button type="button" class="btn btn-block btn-primary"
+            title="Ще показва цената за деня на избраното гориво под иконката на приложението"
+            id="set-as-favorite">Използвай по подразбиране</button>
 </form>
 
 <script src="lib/jquery/dist/jquery.min.js"></script>
@@ -32,9 +37,11 @@
 <script src="lib/moment/moment.js"></script>
 <script src="lib/jquery-ui/jquery-ui.min.js"></script>
 <script src="lib/q/q.js"></script>
+<script src="js/helpers/analytics.js"></script>
 <script src="js/helpers/enum.js"></script>
 <script src="js/helpers/http-requester.js"></script>
 <script src="js/services/fuelo.js"></script>
+<script src="js/helpers/persister.js"></script>
 <script src="js/controllers/popup.js"></script>
 </body>
 </html>

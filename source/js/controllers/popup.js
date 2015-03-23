@@ -7,6 +7,8 @@
         UI_DATE_FORMAT = "yy-mm-dd",
         $fuelTypesSelect = $('#fuel-types'),
         $getPricesButton = $('#get-prices'),
+        $setFavoriteFuelButton = $('set-as-favorite'),
+        updateFavoriteFuelInfo = fueloChromeApp.updateFavoriteFuelInformation,
         $resultContainer = $('#result-field'),
         $datePicker = $(".date-picker"),
         $navBarLink = $('#nav-bar-link'),
@@ -59,6 +61,7 @@
         _renderFuelTypesDropDown();
         $getPricesButton.on('click', _retrieveInformationFromService);
         $getPricesButton.on('click', _trackButtonClick);
+        $setFavoriteFuelButton.on('click', updateFavoriteFuelInfo);
         $navBarLink.on('click', forewordToWebStore);
     }
 
