@@ -18,6 +18,7 @@ module.exports = function (grunt) {
                     '<%= project.libs %>/bootstrap/dist/js/bootstrap.min.js',
                     '<%= project.libs %>/moment/moment.js',
                     '<%= project.libs %>/jquery-ui/jquery-ui.min.js',
+                    '<%= project.libs %>/jquery-ui/ui/i18n/datepicker-bg.js',
                     '<%= project.libs %>/q/q.js',
                     '<%= project.src %>/helpers/enum.js',
                     '<%= project.src %>/helpers/analytics.js',
@@ -68,7 +69,12 @@ module.exports = function (grunt) {
         copy: {
             img: {
                 files: [
-                    {expand: true, cwd: '<%= project.root %>', src: ['img/**'], dest: '<%= project.build %>'}
+                    {expand: true, cwd: '<%= project.root %>', src: ['img/**'], dest: '<%= project.build %>'},
+                    {
+                        expand: true,
+                        cwd:  '<%= project.libs %>/jquery-ui/themes/flick/',
+                        src: ['images/**'],
+                        dest: '<%= project.build %>/styles/'}
                 ]
             },
             build: {
