@@ -42,7 +42,7 @@ module.exports = function (grunt) {
             css: {
                 src: ['<%= project.libs %>/bootstrap/dist/css/bootstrap.min.css',
                     '<%= project.libs %>/bootstrap/dist/css/bootstrap-theme.min.css',
-                    '<%= project.libs %>/jquery-ui/themes/base/jquery-ui.min.css',
+                    '<%= project.libs %>/jquery-ui/themes/flick/jquery-ui.min.css',
                     '<%= project.css %>/popup.css'],
                 dest: '.tmp/concat/styles/build.css'
             }
