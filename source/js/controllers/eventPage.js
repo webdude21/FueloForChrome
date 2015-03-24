@@ -1,34 +1,46 @@
-(function () {
-    var persistentStorage = localStorage.favoriteFuelInfo,
-        updateFavoriteFuelInfo = fueloChromeApp.updateFavoriteFuelInformation;
+var persistentStorage = localStorage.favoriteFuelInfo,
+    updateFavoriteFuelInfo = fueloChromeApp.updateFavoriteFuelInformation;
 
-    function _drawIcon() {
-        chrome.browserAction.setBadgeBackgroundColor({color: [208, 0, 24, 255]});
-        chrome.browserAction.setBadgeText({
-            text: "1,29 "
-        });
-    }
+function drawIcon(text) {
+    chrome.browserAction.setBadgeBackgroundColor({color: [200, 0, 0, 200]});
+    chrome.browserAction.setBadgeText({
+        text: text
+    });
+}
 
-    function updateIcon() {
-        if (persistentStorage && persistentStorage.fuelType) {
-            //  || moment.diff(persistentStorage.lastUpdate, 'days') >= 1
-            if (!persistentStorage.cachedValue) {
-                updateFavoriteFuelInfo(persistentStorage.fuelType).then(function (result) {
-                    persistentStorage.cachedValue = result.price;
-                    _drawIcon();
-                });
-            } else {
-                _drawIcon();
-            }
+function updateIcon() {
+    var savedData = loadSavedData();
+    if (savedData && savedData.fuelType) {
+        console.log(dataIsFromToday(savedData.lastUpdated));
+        if (savedData.cachedValue) {
+            drawIcon(savedData.cachedValue);
+        } else {
+            updateFavoriteFuelInfo(savedData.fuelType).then(function (result) {
+                savedData.cachedValue = result.price;
+                saveChanges(savedData);
+                drawIcon(result.price);
+            });
         }
     }
+}
 
-    if (chrome.runtime && chrome.runtime.onStartup) {
-        chrome.runtime.onStartup.addListener(updateIcon);
-        chrome.runtime.onMessage.addListener(function(input){
-            persistentStorage = input;
-            updateIcon();
-        });
-    }
-}());
+function dataIsFromToday(data){
+    return moment(data).add(1, 'days') > moment().endOf('day');
+}
 
+function saveChanges(dataToSave) {
+    persistentStorage = JSON.stringify(dataToSave);
+}
+
+function loadSavedData() {
+    return JSON.parse(persistentStorage);
+}
+
+if (chrome.runtime && chrome.runtime.onStartup) {
+    chrome.runtime.onStartup.addListener(updateIcon);
+    chrome.runtime.onInstalled.addListener(updateIcon);
+    chrome.runtime.onMessage.addListener(function (input) {
+        saveChanges(input);
+        updateIcon();
+    });
+}
