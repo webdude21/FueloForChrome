@@ -11,8 +11,7 @@ function drawIcon(text) {
 function updateIcon() {
     var savedData = loadSavedData();
     if (savedData && savedData.fuelType) {
-        console.log(dataIsFromToday(savedData.lastUpdated));
-        if (savedData.cachedValue) {
+        if (savedData.cachedValue && dataIsFromToday(savedData.lastUpdated)) {
             drawIcon(savedData.cachedValue);
         } else {
             updateFavoriteFuelInfo(savedData.fuelType).then(function (result) {
@@ -38,7 +37,6 @@ function loadSavedData() {
 
 if (chrome.runtime && chrome.runtime.onStartup) {
     chrome.runtime.onStartup.addListener(updateIcon);
-    chrome.runtime.onInstalled.addListener(updateIcon);
     chrome.runtime.onMessage.addListener(function (input) {
         saveChanges(input);
         updateIcon();
