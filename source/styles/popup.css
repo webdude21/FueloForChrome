@@ -16,3 +16,7 @@ section, form {
     padding: 0 10px;
     margin: 20px 0 20px 0;
 }
+
+.ui-datepicker{
+    margin-top: -130px;
+}
