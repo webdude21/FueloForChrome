@@ -4,33 +4,31 @@
             {value: 'lpg', text: 'Пропан бутан'},
             {value: 'methane', text: 'Метан'}],
         services = fueloChromeApp.services,
-        UI_DATE_FORMAT = "yy-mm-dd",
+        UI_DATE_FORMAT = 'yy-mm-dd',
+        CLICK_EVENT = 'click',
+        LOAD_EVENT = 'load',
         $fuelTypesSelect = $('#fuel-types'),
         $getPricesButton = $('#get-prices'),
         $setFavoriteFuelButton = $('#set-as-favorite'),
         $resultContainer = $('#result-field'),
-        $datePicker = $(".date-picker"),
+        $datePicker = $('.date-picker'),
         $navBarLink = $('#nav-bar-link'),
         authorLink = 'https://github.com/webdude21/FueloForChrome';
 
-    function _renderFuelTypesDropDown() {
-        fuelTypesForUI.forEach(function (item) {
-            $fuelTypesSelect.append('<option value="' + item.value + '">' + item.text + '</option>');
-        });
+    function addToDropDown(item) {
+        $fuelTypesSelect.append('<option value="' + item.value + '">' + item.text + '</option>');
     }
 
-    function _trackButtonClick(e) {
+    function trackButtonClick(e) {
         _gaq.push(['_trackEvent', e.target.id, 'clicked']);
     }
 
-    function _retrieveInformationFromService() {
+    function retrieveInformationFromService() {
         var date = moment($datePicker.val());
-        services.getAveragePrice($fuelTypesSelect.val(), date).then(function (result) {
-            _renderResult(result);
-        });
+        services.getAveragePrice($fuelTypesSelect.val(), date).then(renderResult);
     }
 
-    function _renderResult(result) {
+    function renderResult(result) {
         var resultText,
             $resultHTML,
             querySuccess = (result.status === 'OK');
@@ -51,22 +49,24 @@
         $resultContainer.append($resultHTML);
     }
 
+    function saveUserPreferences() {
+        chrome.runtime.sendMessage({
+            fuelType: $fuelTypesSelect.val(),
+            lastUpdated: moment().startOf('day')
+        });
+    }
+
     function forewordToWebStore() {
         chrome.tabs.create({url: authorLink});
     }
 
     function renderView() {
         $datePicker.datepicker({dateFormat: UI_DATE_FORMAT, showButtonPanel: true});
-        _renderFuelTypesDropDown();
-        $getPricesButton.on('click', _retrieveInformationFromService);
-        $getPricesButton.on('click', _trackButtonClick);
-        $setFavoriteFuelButton.on('click', function(){
-            chrome.runtime.sendMessage({
-                fuelType: $fuelTypesSelect.val(),
-                lastUpdated: moment().startOf('day')
-            });
-        });
-        $navBarLink.on('click', forewordToWebStore);
+        fuelTypesForUI.forEach(addToDropDown);
+        $getPricesButton.on(CLICK_EVENT, retrieveInformationFromService);
+        $getPricesButton.on(CLICK_EVENT, trackButtonClick);
+        $setFavoriteFuelButton.on(CLICK_EVENT, saveUserPreferences);
+        $navBarLink.on(CLICK_EVENT, forewordToWebStore);
     }
 
     $(window).on('load', renderView);
