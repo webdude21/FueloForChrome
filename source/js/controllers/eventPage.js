@@ -1,18 +1,17 @@
-(function(){
+(function () {
     var persistentStorage = localStorage.favoriteFuelInfo,
-        updateFavoriteFuelInfo = fueloChromeApp.updateFavoriteFuelInformation;
+        updateFavoriteFuelInfo = fueloChromeApp.updateFavoriteFuelInformation,
+        textColor = [200, 0, 0, 200];
 
     function drawIcon(text) {
-        chrome.browserAction.setBadgeBackgroundColor({color: [200, 0, 0, 200]});
-        chrome.browserAction.setBadgeText({
-            text: text
-        });
+        chrome.browserAction.setBadgeBackgroundColor({color: textColor});
+        chrome.browserAction.setBadgeText({text: text});
     }
 
     function updateIcon() {
         var savedData = loadSavedData();
         if (savedData && savedData.fuelType) {
-            if (savedData.cachedValue && dataIsFromToday(savedData.lastUpdated)) {
+            if (savedData.cachedValue && isFromToday(savedData.lastUpdated)) {
                 drawIcon(savedData.cachedValue);
             } else {
                 updateFavoriteFuelInfo(savedData.fuelType).then(function (result) {
@@ -24,7 +23,7 @@
         }
     }
 
-    function dataIsFromToday(data){
+    function isFromToday(data) {
         return moment(data).add(1, 'days') > moment().endOf('day');
     }
 
@@ -36,11 +35,13 @@
         return JSON.parse(persistentStorage);
     }
 
+    function readInputFromPopup(input) {
+        saveChanges(input);
+        updateIcon();
+    }
+
     if (chrome.runtime && chrome.runtime.onStartup) {
         chrome.runtime.onStartup.addListener(updateIcon);
-        chrome.runtime.onMessage.addListener(function (input) {
-            saveChanges(input);
-            updateIcon();
-        });
+        chrome.runtime.onMessage.addListener(readInputFromPopup);
     }
 }());

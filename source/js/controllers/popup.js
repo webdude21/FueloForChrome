@@ -69,5 +69,5 @@
         $navBarLink.on(CLICK_EVENT, forewordToWebStore);
     }
 
-    $(window).on('load', renderView);
+    $(window).on(LOAD_EVENT, renderView);
 }());
