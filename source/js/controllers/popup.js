@@ -5,8 +5,8 @@
             {value: 'methane', text: 'Метан'}],
         services = fueloChromeApp.services,
         UI_DATE_FORMAT = 'yy-mm-dd',
-        CLICK_EVENT = 'click',
-        LOAD_EVENT = 'load',
+        click = 'click',
+        load = 'load',
         $fuelTypesSelect = $('#fuel-types'),
         $getPricesButton = $('#get-prices'),
         $setFavoriteFuelButton = $('#set-as-favorite'),
@@ -63,11 +63,11 @@
     function renderView() {
         $datePicker.datepicker({dateFormat: UI_DATE_FORMAT, showButtonPanel: true});
         fuelTypesForUI.forEach(addToDropDown);
-        $getPricesButton.on(CLICK_EVENT, retrieveInformationFromService);
-        $getPricesButton.on(CLICK_EVENT, trackButtonClick);
-        $setFavoriteFuelButton.on(CLICK_EVENT, saveUserPreferences);
-        $navBarLink.on(CLICK_EVENT, forewordToWebStore);
+        $getPricesButton.on(click, retrieveInformationFromService);
+        $getPricesButton.on(click, trackButtonClick);
+        $setFavoriteFuelButton.on(click, saveUserPreferences);
+        $navBarLink.on(click, forewordToWebStore);
     }
 
-    $(window).on(LOAD_EVENT, renderView);
+    $(window).on(load, renderView);
 }());
