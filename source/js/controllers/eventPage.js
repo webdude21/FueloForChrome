@@ -5,7 +5,7 @@
 
     function drawIcon(text) {
         chrome.browserAction.setBadgeBackgroundColor({color: textColor});
-        chrome.browserAction.setBadgeText({text: text});
+        chrome.browserAction.setBadgeText({text: text.toString()});
     }
 
     function updateIcon() {
