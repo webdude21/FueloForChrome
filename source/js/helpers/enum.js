@@ -1,5 +1,5 @@
 if (!fueloChromeApp) {
-    var fueloChromeApp = {};
+    fueloChromeApp = {};
 }
 
 fueloChromeApp.Enum = (function () {
