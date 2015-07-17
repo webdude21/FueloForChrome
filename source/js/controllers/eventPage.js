@@ -1,4 +1,4 @@
-(function () {
+(function (fueloChromeApp, chrome, localStorage) {
     var persistentStorage = localStorage.favoriteFuelInfo,
         updateFavoriteFuelInfo = fueloChromeApp.updateFavoriteFuelInformation,
         textColor = [200, 0, 0, 200];
@@ -44,4 +44,4 @@
         chrome.runtime.onStartup.addListener(updateIcon);
         chrome.runtime.onMessage.addListener(readInputFromPopup);
     }
-}());
+}(fueloChromeApp, chrome, localStorage));

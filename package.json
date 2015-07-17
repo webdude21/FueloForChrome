@@ -1,6 +1,6 @@
 {
   "name": "FueloForChrome",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Fuelo's service for chrome",
   "main": "index.js",
   "scripts": {

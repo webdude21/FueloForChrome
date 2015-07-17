@@ -1,4 +1,4 @@
-(function () {
+(function ($, window, chrome, fueloChromeApp) {
     var fuelTypesForUI = [{value: 'gasoline', text: 'Бензин'},
             {value: 'diesel', text: 'Дизел'},
             {value: 'lpg', text: 'Пропан бутан'},
@@ -36,8 +36,8 @@
         resultText = querySuccess ? 'Средна цена: ' + result.price + ' ' + result.dimension : result.error_message;
 
         $resultHTML = $('<div class="alert alert-dismissible">' +
-        '<button type="button" class="close" data-dismiss="alert">×</button>' +
-        '<strong>' + resultText + '</strong></div>');
+            '<button type="button" class="close" data-dismiss="alert">×</button>' +
+            '<strong>' + resultText + '</strong></div>');
 
         if (querySuccess) {
             $resultHTML.addClass('alert-success');
@@ -70,4 +70,4 @@
     }
 
     $(window).on(load, renderView);
-}());
+}($, window, chrome, fueloChromeApp));
