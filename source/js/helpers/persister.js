@@ -1,4 +1,4 @@
-(function (fueloChromeApp, Q, localStorage) {
+(function (fueloChromeApp, Q, localStorage, dateUtil) {
     fueloChromeApp.updateFavoriteFuelInformation = function (fuelType) {
         var deferred = Q.defer();
 
@@ -6,11 +6,11 @@
             localStorage.favoriteFuelInfo = JSON.stringify({
                 fuelType: fuelType,
                 cachedValue: result.price,
-                lastUpdated: moment().startOf('day')
+                lastUpdated: dateUtil().startOf('day')
             });
             deferred.resolve(result);
         });
 
         return deferred.promise;
     };
-}(fueloChromeApp, Q, localStorage));
+}(fueloChromeApp, Q, localStorage, moment));

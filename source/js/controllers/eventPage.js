@@ -1,4 +1,4 @@
-(function (fueloChromeApp, chrome, localStorage) {
+(function (fueloChromeApp, chrome, localStorage, dateUtil) {
     var persistentStorage = localStorage.favoriteFuelInfo,
         updateFavoriteFuelInfo = fueloChromeApp.updateFavoriteFuelInformation,
         textColor = [200, 0, 0, 200];
@@ -24,7 +24,7 @@
     }
 
     function isFromToday(data) {
-        return moment(data).add(1, 'days') > moment().endOf('day');
+        return dateUtil(data).add(1, 'days') > dateUtil().endOf('day');
     }
 
     function saveChanges(dataToSave) {
@@ -44,4 +44,4 @@
         chrome.runtime.onStartup.addListener(updateIcon);
         chrome.runtime.onMessage.addListener(readInputFromPopup);
     }
-}(fueloChromeApp, chrome, localStorage));
+}(fueloChromeApp, chrome, localStorage, moment));

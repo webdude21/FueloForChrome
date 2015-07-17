@@ -1,8 +1,7 @@
-(function (fueloChromeApp) {
+(function (fueloChromeApp, dateUtil) {
     fueloChromeApp.services = (function () {
         var httpRequester = fueloChromeApp.httpRequester,
             API_KEY = '2aa197c518fe4da',
-            dateUtil = moment,
             DATE_FORMAT = 'YYYY-MM-DD',
             BASE_URL = 'http://fuelo.net/api/',
             params = {
@@ -16,12 +15,14 @@
 
         return {
             getAveragePrice: function (inputFuelType, date) {
-                var requestFuelType = inputFuelType || fuelType.gasoline;
-                var requestURL = httpRequester.addParams(params.key, API_KEY, BASE_URL + params.price);
+                var requestFuelType = inputFuelType || fuelType.gasoline,
+                    formattedDate,
+                    requestURL = httpRequester.addParams(params.key, API_KEY, BASE_URL + params.price);
+
                 requestURL = httpRequester.addParams(params.fuel, requestFuelType, requestURL);
 
                 if (dateUtil(date).isValid()) {
-                    var formattedDate = dateUtil(date).format(DATE_FORMAT);
+                    formattedDate = dateUtil(date).format(DATE_FORMAT);
                     requestURL = httpRequester.addParams(params.date, formattedDate, requestURL);
                 }
 
@@ -32,4 +33,4 @@
             DATE_FORMAT: DATE_FORMAT
         };
     }());
-}(fueloChromeApp));
+}(fueloChromeApp, moment));

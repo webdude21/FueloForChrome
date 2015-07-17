@@ -1,4 +1,4 @@
-(function ($, window, chrome, fueloChromeApp) {
+(function ($, window, chrome, fueloChromeApp, dateUtil, googleAnalytics) {
     var fuelTypesForUI = [{value: 'gasoline', text: 'Бензин'},
             {value: 'diesel', text: 'Дизел'},
             {value: 'lpg', text: 'Пропан бутан'},
@@ -19,12 +19,12 @@
         $fuelTypesSelect.append('<option value="' + item.value + '">' + item.text + '</option>');
     }
 
-    function trackButtonClick(e) {
-        _gaq.push(['_trackEvent', e.target.id, 'clicked']);
+    function trackButtonClick(event) {
+        googleAnalytics.push(['_trackEvent', event.target.id, 'clicked']);
     }
 
     function retrieveInformationFromService() {
-        var date = moment($datePicker.val());
+        var date = dateUtil($datePicker.val());
         services.getAveragePrice($fuelTypesSelect.val(), date).then(renderResult);
     }
 
@@ -52,7 +52,7 @@
     function saveUserPreferences() {
         chrome.runtime.sendMessage({
             fuelType: $fuelTypesSelect.val(),
-            lastUpdated: moment().startOf('day')
+            lastUpdated: dateUtil().startOf('day')
         });
     }
 
@@ -70,4 +70,4 @@
     }
 
     $(window).on(load, renderView);
-}($, window, chrome, fueloChromeApp));
+}($, window, chrome, fueloChromeApp, moment, _gaq));
